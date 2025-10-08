@@ -3,13 +3,24 @@ body {
 	   and use the OS’s UI font as the website font
 	 */
   font: 100%/1.5 system-ui;
-  max-width: 350px;
+  max-width: 1500px;
   margin-inline: 100px;
   padding: 20px;
 }
 
 nav {
   display: flex;
+  margin-bottom: 10px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: oklch(80% 3% 200);
+}
+
+a.current {
+  padding-bottom: 10px;
+  border-bottom-width: 0.4em;
+  border-bottom-style: solid;
+  border-bottom-color: oklch(69.143% 0.00712 209.336);
 }
 
 ul {
@@ -19,6 +30,9 @@ ul {
     a {
       flex: 1;
       text-decoration: none;
+      color: inherit;
+      text-align: center;
+      padding: 0.5em;
     }
   }
 }
