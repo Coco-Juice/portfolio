@@ -7,3 +7,19 @@ body {
   margin-inline: 100px;
   padding: 20px;
 }
+
+nav {
+  display: flex;
+}
+
+ul {
+  display: contents;
+  li {
+    display: contents;
+    a {
+      flex: 1;
+      text-decoration: none;
+    }
+  }
+}
+
