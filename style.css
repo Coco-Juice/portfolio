@@ -50,3 +50,14 @@ ul {
   }
 }
 
+label, button {
+  display: block;
+  margin-block: 10px 5px;
+}
+
+input,textarea, button {
+  font: inherit;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
