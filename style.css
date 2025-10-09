@@ -8,9 +8,9 @@ body {
 	   and use the OS’s UI font as the website font
 	 */
   font: 100%/1.5 system-ui;
-  max-width: 1500px;
-  margin-inline: 100px;
-  padding: 20px;
+  max-width: 100ch;
+  margin-inline: max(1em, (100% - 100ch) / 2);
+  padding: 10px;
 }
 
 nav {
@@ -62,5 +62,20 @@ form {
 
   input, textarea, button {
     font: inherit;
+  }
+}
+
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+  gap: 1em;
+}
+
+.projects article{
+  grid-template-rows: subgrid;
+  grid-row: span 3;
+
+  h2 {
+    margin: 0;
   }
 }
