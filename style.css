@@ -50,6 +50,10 @@ ul {
   }
 }
 
+/*
+Contact
+*/
+
 form {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -64,6 +68,10 @@ form {
     font: inherit;
   }
 }
+
+/*
+Project
+*/
 
 .projects {
   display: grid;
@@ -87,4 +95,113 @@ h1 {
 h1, h2, h3, h4, h5, h6 {
   line-height: 1.1;
   text-wrap: balance;
+}
+
+/*
+Resume
+*/
+
+.resume, .education, .experience, .resume_projects, .skills {
+  font-family: 'Cambria', system-ui, serif;
+}
+
+.resume {
+  text-align: center;
+  display: block;
+}
+
+.education {
+  margin-bottom: 0.5em;
+}
+
+.edu-item {
+  margin-bottom: 0.5em;
+}
+
+.edu-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.education b {
+  font-weight: bold;
+}
+
+.edu-row span {
+  line-height: 1.2;
+}
+
+.location, .date {
+  text-align: right;
+  color: #4d4b4b;
+}
+
+.education .edu-item + .edu-item {
+  margin-top: 0.75em;
+}
+
+section h3 {
+  margin-bottom: 0.2em;
+}
+
+section h3 + hr {
+  margin-top: 0.2em;
+  margin-bottom: 0.4em;
+}
+
+.experience ul {
+  display: block;           
+  padding-left: 1.5em;       
+  margin: 0.5em 0;           
+  
+  li {
+    display: list-item;
+  }
+}
+
+.resume_projects ul {
+  display: block;           
+  padding-left: 1.5em;       
+  margin: 0.5em 0;           
+  
+  li {
+    display: list-item;
+  }
+}
+
+.experience p, .resume_projects p {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+.experience ul, .resume_projects ul {
+  display: block;
+  padding-left: 1.5em;
+  margin: 0.1em 0 0.25em 0;
+
+  li {
+    display: list-item;
+    margin-bottom: 0.1em;
+  }
+}
+
+section {
+  margin-bottom: 0.4em;
+}
+
+.exp-row, .act-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.exp-date, .act-date {
+  text-align: right;
+  color: #4d4b4b;
+}
+
+.skills p {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
 }
