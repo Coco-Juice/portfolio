@@ -52,6 +52,14 @@ ul {
   }
 }
 
+label.color-scheme {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font: inherit;
+  font-size: 80%;
+}
+
 /*
 Contact
 */
