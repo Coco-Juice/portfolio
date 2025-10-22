@@ -53,6 +53,44 @@ label.color-scheme {
   font-size: 80%;
 }
 
+#profile-stats {
+  margin: 2rem auto;
+  padding: 1.5rem;
+  max-width: 600px;
+  background: #f8f9fa;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  font-family: system-ui, sans-serif;
+}
+
+#profile-stats h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+#profile-stats dl {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+#profile-stats dt {
+  grid-row: 1;
+  font-weight: 600;
+  color: #555;
+}
+
+#profile-stats dd {
+  grid-row: 2;
+  margin: 0;
+  font-size: 1.2rem;
+  color: #007acc;
+}
+
 /*
 Contact
 */
