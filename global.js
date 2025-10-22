@@ -93,7 +93,6 @@ form?.addEventListener("submit", function (event) {
 export async function fetchJSON(url) {
   try {
     const response = await fetch(url);
-    console.log(response);
     if (!response.ok) {
       throw new Error(`Failed to fetch projects: ${response.statusText}`);
     }
@@ -111,11 +110,19 @@ export function renderProjects(project, containerElement, headingLevel = 'h2') {
     return;
   }
 
-  const article = document.createElement('article');
-  article.innerHTML = `
-    <${headingLevel}>${project.title}</${headingLevel}>
-    <img src="${project.image}" alt="${project.title}">
-    <p>${project.description}</p>
-  `;
-  containerElement.appendChild(article);
+  for (const p of project){
+    const article = document.createElement('article');
+    article.innerHTML = `
+      <${headingLevel}>${p.title}</${headingLevel}>
+      <img src="${p.image}" alt="${p.title}">
+      <p>${p.description}</p>
+    `;
+    containerElement.appendChild(article);
+  }
+  
+
+}
+
+export async function fetchGitHubData(username) {
+  // return statement here
 }
