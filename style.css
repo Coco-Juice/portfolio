@@ -149,6 +149,40 @@ h1, h2, h3, h4, h5, h6 {
   overflow: visible;
 }
 
+.container {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+  gap: 1em;
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
+  padding: 1em;
+  margin-top: 1em;
+  background: #fafafa;
+  flex: 1;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: sans-serif;
+}
+
+.legend-item .swatch {
+  width: 1em;
+  height: 1em;
+  background-color: var(--color);
+  border-radius: 4px;
+  display: inline-block;
+}
+
+
 /*
 Resume
 */

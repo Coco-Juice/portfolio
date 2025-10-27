@@ -10,7 +10,14 @@ projectsTitle.textContent = projects.length;
 
 let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
 
-let data = [1, 2, 3, 4, 5, 5];
+let rolledData = d3.rollups(
+  projects,
+  (v) => v.length,
+  (d) => d.year,
+);
+let data = rolledData.map(([year, count]) => {
+  return { value: count, label: year };
+});
 let total = 0;
 
 for (let d of data) {
@@ -19,7 +26,7 @@ for (let d of data) {
 
 let angle = 0;
 let colors = d3.scaleOrdinal(d3.schemeTableau10);
-let sliceGenerator = d3.pie();
+let sliceGenerator = d3.pie().value((d) => d.value);
 let arcData = sliceGenerator(data);
 let arcs = arcData.map((d) => arcGenerator(d));
 
@@ -35,3 +42,13 @@ arcs.forEach((arc, idx) => {
       .attr('d', arc)
       .attr('fill', colors(idx));
 });
+
+let legend = d3.select('.legend');
+data.forEach((d, idx) => {
+  legend
+    .append('li')
+    .attr('style', `--color:${colors(idx)}`) // set the style attribute while passing in parameters
+    .attr('class', 'legend-item')
+    .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`); // set the inner html of <li>
+});
+
