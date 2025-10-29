@@ -216,7 +216,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .legend-item.selected .swatch {
-  background-color: oklch(60% 45% 0); /* same highlight color as your pie slice */
+  background-color: oklch(60% 45% 0);
 }
 
 path {

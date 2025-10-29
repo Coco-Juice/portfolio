@@ -50,6 +50,19 @@ function renderPieChart(projectsGiven) {
           .attr('class', (_, idx) => (
             `legend-item${idx === selectedIndex ? ' selected' : ''}`
           ));
+          if (selectedIndex === -1) {
+            // show all projects again
+            renderProjects(projects, projectsContainer, 'h2');
+            projectsTitle.textContent = projects.length;
+          } else {
+            // get the selected year label from newData
+            const selectedYear = newData[selectedIndex].label;
+            // filter projects by that year
+            const filteredByYear = projects.filter(p => p.year === selectedYear);
+            // re-render project cards
+            renderProjects(filteredByYear, projectsContainer, 'h2');
+            projectsTitle.textContent = filteredByYear.length;
+          }
       });
   });
 
@@ -70,6 +83,7 @@ searchInput.addEventListener('input', (event) => {
     const values = Object.values(project).join('\n').toLowerCase();
     return values.includes(query);
   });
+
   renderProjects(filteredProjects, projectsContainer, 'h2');
   projectsTitle.textContent = filteredProjects.length;
   renderPieChart(filteredProjects);
