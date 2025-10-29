@@ -7,6 +7,7 @@ const projectsTitle = document.querySelector('.projects-title');
 const searchInput = document.querySelector('.searchBar');
 const colors = d3.scaleOrdinal(d3.schemeTableau10);
 const arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
+let selectedIndex = -1;
 
 renderProjects(projects, projectsContainer, 'h2');
 projectsTitle.textContent = projects.length;
@@ -27,16 +28,29 @@ function renderPieChart(projectsGiven) {
   const newArcData = newSliceGenerator(newData);
   const newArcs = newArcData.map((d) => arcGenerator(d));
 
-  const newSVG = d3.select('svg');
+  let newSVG = d3.select('svg');
   newSVG.selectAll('path').remove();
-  const legend = d3.select('.legend');
+  let legend = d3.select('.legend');
   legend.selectAll('*').remove();
 
   newArcs.forEach((arc, idx) => {
     newSVG
       .append('path')
       .attr('d', arc)
-      .attr('fill', colors(idx));
+      .attr('fill', colors(idx))
+      .on('click', () => {
+        selectedIndex = selectedIndex === idx ? -1 : idx;
+        newSVG
+          .selectAll('path')
+          .attr('class', (_, idx) => (
+            idx === selectedIndex ? 'selected' : ''
+          ));
+        legend
+          .selectAll('li')
+          .attr('class', (_, idx) => (
+            `legend-item${idx === selectedIndex ? ' selected' : ''}`
+          ));
+      });
   });
 
   newData.forEach((d, idx) => {

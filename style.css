@@ -201,6 +201,29 @@ h1, h2, h3, h4, h5, h6 {
   transition: all 0.25s ease;
 }
 
+&:has(path:hover) {
+  path:not(:hover) {
+    opacity: 0.5;
+  }
+}
+
+.selected {
+  --color: oklch(60% 45% 0);
+
+  &:is(path) {
+    fill: var(--color) !important;
+  }
+}
+
+.legend-item.selected .swatch {
+  background-color: oklch(60% 45% 0); /* same highlight color as your pie slice */
+}
+
+path {
+  transition: 300ms;
+  cursor: pointer;
+}
+
 /*
 Resume
 */
