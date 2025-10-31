@@ -6,8 +6,10 @@ const projectsContainer = document.querySelector('.projects');
 const githubData = await fetchGitHubData('Coco-Juice');
 const profileStats = document.querySelector('#profile-stats');
 
+/* display 3 most recent projects */
 renderProjects(latestProjects, projectsContainer, 'h2');
 
+/* insert GitHub stats */
 if (profileStats) {
   profileStats.innerHTML = `
         <dl>

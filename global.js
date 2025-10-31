@@ -1,8 +1,9 @@
 console.log('IT’S ALIVE!');
+const BASE_PATH = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
+  ? "/"                  // Local server
+  : "/portfolio/";         // GitHub Pages repo name
 
-function $$(selector, context = document) {
-  return Array.from(context.querySelectorAll(selector));
-}
+/* create navigation bar */
 
 let pages = [
   { url: '', title: 'Home' },
@@ -11,17 +12,8 @@ let pages = [
   { url: 'resume.html', title: 'Resume' },
   { url: 'https://github.com/Coco-Juice', title: 'GitHub' }
 ];
-
-const BASE_PATH = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
-  ? "/"                  // Local server
-  : "/portfolio/";         // GitHub Pages repo name
-
 let nav = document.createElement('nav');
 document.body.prepend(nav);
-
-function normalizePath(path) {
-  return path.replace(/\/index\.html$/, "").replace(/\/$/, "");
-}
 
 for (let p of pages) {
     let url = p.url;
@@ -41,6 +33,8 @@ for (let p of pages) {
         a.target = "_blank";
     }
 }
+
+/* create theme chooser */
 
 document.body.insertAdjacentHTML(
   'afterbegin',
@@ -66,6 +60,8 @@ select.addEventListener('input', function (event) {
   document.documentElement.style.setProperty('color-scheme', event.target.value);
   localStorage.colorScheme = event.target.value
 });
+
+/* contact form functionality */
 
 const form = document.querySelector("form");
 
@@ -103,6 +99,7 @@ export async function fetchJSON(url) {
   }
 }
 
+/* display projects */
 
 export function renderProjects(project, containerElement, headingLevel = 'h2') {
   containerElement.innerHTML = '';
@@ -117,6 +114,8 @@ export function renderProjects(project, containerElement, headingLevel = 'h2') {
     containerElement.appendChild(article);
   }
 }
+
+/* pull GitHub data */
 
 export async function fetchGitHubData(username) {
   return fetchJSON(`https://api.github.com/users/${username}`);

@@ -14,6 +14,8 @@ body {
   padding: 10px;
 }
 
+/* navigation bar */
+
 nav {
   --border-color: oklch(50% 10% 200 / 40%);
   display: flex;
@@ -45,6 +47,8 @@ a:hover {
   background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
 }
 
+/* background theme */
+
 label.color-scheme {
   position: absolute;
   top: 1rem;
@@ -52,6 +56,8 @@ label.color-scheme {
   font: inherit;
   font-size: 80%;
 }
+
+/* GitHub stats */
 
 #profile-stats {
   margin: 2rem auto;
@@ -142,6 +148,8 @@ h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
 }
 
+/* pie chart */
+
 #projects-pie-plot {
   max-width: 20em;
   margin-block: 2em;
@@ -154,6 +162,8 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   gap: 1em;
 }
+
+/* pie chart legend */
 
 .legend {
   display: grid;
@@ -182,6 +192,33 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-block;
 }
 
+&:has(path:hover) {
+  path:not(:hover) {
+    opacity: 0.5;
+  }
+}
+
+/* highlighted pie section & legend */
+
+.selected {
+  --color: oklch(60% 45% 0);
+
+  &:is(path) {
+    fill: var(--color) !important;
+  }
+}
+
+.legend-item.selected .swatch {
+  background-color: oklch(60% 45% 0);
+}
+
+path {
+  transition: 300ms;
+  cursor: pointer;
+}
+
+/* search bar */
+
 .searchBar {
   display: block;
   width: 100%;
@@ -199,29 +236,6 @@ h1, h2, h3, h4, h5, h6 {
 
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   transition: all 0.25s ease;
-}
-
-&:has(path:hover) {
-  path:not(:hover) {
-    opacity: 0.5;
-  }
-}
-
-.selected {
-  --color: oklch(60% 45% 0);
-
-  &:is(path) {
-    fill: var(--color) !important;
-  }
-}
-
-.legend-item.selected .swatch {
-  background-color: oklch(60% 45% 0);
-}
-
-path {
-  transition: 300ms;
-  cursor: pointer;
 }
 
 /*
