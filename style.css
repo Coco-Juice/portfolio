@@ -346,3 +346,40 @@ section {
   margin-top: 0.1em;
   margin-bottom: 0.1em;
 }
+
+/*
+Meta
+*/
+
+#stats dl {
+  margin: 2rem auto;
+  padding: 1.5rem;
+  max-width: 1000px;
+  background: #f8f9fa;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  font-family: system-ui, sans-serif;
+
+  display: grid;
+  grid-auto-flow: column;        /* Place items across in columns */
+  grid-template-rows: auto auto; /* First row: dt labels / Second row: dd values */
+  gap: 1rem 2rem;                /* spacing between items */
+}
+
+#stats dt {
+  grid-row: 1;
+  font-weight: 600;
+  color: #555;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+#stats dd {
+  grid-row: 2;
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #007acc;
+}
