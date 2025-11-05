@@ -10,6 +10,7 @@ let pages = [
   { url: 'projects/', title: 'Projects' },
   { url: 'contacts/', title: 'Contacts' },
   { url: 'resume.html', title: 'Resume' },
+  { url: 'meta/', title: 'Meta'},
   { url: 'https://github.com/Coco-Juice', title: 'GitHub' }
 ];
 let nav = document.createElement('nav');
