@@ -383,3 +383,7 @@ Meta
   font-weight: 500;
   color: #007acc;
 }
+
+g.gridlines {
+  opacity: 30%;
+}
