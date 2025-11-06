@@ -43,7 +43,7 @@ a:hover {
   padding-bottom: 10px;
   border-bottom-width: 0.4em;
   border-bottom-style: solid;
-  border-bottom-color: var(--color-accent);
+  border-bottom-color: color-mix(in oklch, var(--color-accent), canvas 30%);
   background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
 }
 
@@ -63,7 +63,7 @@ label.color-scheme {
   margin: 2rem auto;
   padding: 1.5rem;
   max-width: 600px;
-  background: #f8f9fa;
+  background: color-mix(in oklch, var(--color-accent) 5%, canvas 97%);
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   text-align: center;
@@ -173,7 +173,7 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 0.5em;
   padding: 1em;
   margin-top: 1em;
-  background: #fafafa;
+  background: color-mix(in oklch, var(--color-accent) 5%, canvas 97%);
   flex: 1;
 }
 
@@ -229,7 +229,7 @@ path {
   font-family: inherit;
 
   color: #333;
-  background-color: #fff;
+  background-color: color-mix(in oklch, var(--color-accent) 5%, canvas 97%);
   border: 2px solid #ddd;
   border-radius: 2em;
   outline: none;
@@ -355,7 +355,7 @@ Meta
   margin: 2rem auto;
   padding: 1.5rem;
   max-width: 1000px;
-  background: #f8f9fa;
+  background: color-mix(in oklch, var(--color-accent) 5%, canvas 85%);
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   text-align: center;
@@ -398,10 +398,10 @@ circle:hover {
   transform: scale(1.5);
 }
 
-dl .info {
+dl.info {
   display: grid;
   padding: 0.75rem 1rem;
-  background: rgba(255, 255, 255, 0.9);
+  background: color-mix(in oklch, canvas 85%);
   border-radius: 10px;
   border: 1px solid rgba(0,0,0,0.15);
 

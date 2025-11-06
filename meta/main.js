@@ -75,6 +75,7 @@ function renderCommitInfo(data, commits) {
 function renderScatterPlot(data, commits) {
     const width = 1000;
     const height = 600;
+    const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
 
     const svg = d3
         .select('#chart')
@@ -87,6 +88,8 @@ function renderScatterPlot(data, commits) {
         .range([0, width])
         .nice();
     const yScale = d3.scaleLinear().domain([0, 24]).range([height, 0]);
+    const [minLines, maxLines] = d3.extent(commits, (d) => d.totalLines);
+    const rScale = d3.scaleSqrt().domain([minLines, maxLines]).range([5, 30]);
     
     const margin = { top: 10, right: 10, bottom: 30, left: 20 };
     const usableArea = {
@@ -128,21 +131,24 @@ function renderScatterPlot(data, commits) {
         .attr('transform', `translate(${usableArea.left}, 0)`)
         .call(yAxis);
 
-        const dots = svg.append('g').attr('class', 'dots');
+    const dots = svg.append('g').attr('class', 'dots');
     dots
         .selectAll('circle')
-        .data(commits)
+        .data(sortedCommits)
         .join('circle')
         .attr('cx', (d) => xScale(d.datetime))
         .attr('cy', (d) => yScale(d.hourFrac))
-        .attr('r', 5)
+        .attr('r', (d) => rScale(d.totalLines))
         .attr('fill', 'steelblue')
+        .style('fill-opacity', 0.6)
         .on('mouseenter', (event, commit) => {
+            d3.select(event.currentTarget).style('fill-opacity', 1);
             renderTooltipContent(commit);
             updateTooltipVisibility(true);
             updateTooltipPosition(event);
         })
         .on('mouseleave', () => {
+            d3.select(event.currentTarget).style('fill-opacity', 0.6);
             updateTooltipVisibility(false);
         });
   
