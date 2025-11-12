@@ -18,10 +18,10 @@
         "description": "Collaborated with another student to code a rudimentary coding app similar to Discord and iMessage. Simulated sending and receiving messages by utilizing GUI, SQL, sockets, and multithreading."
     },
     {
-        "title": "Excepturi soluta quasi hic.",
-        "year": "2024",
+        "title": "Boston Bikewatching",
+        "year": "2025",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Aliquid nemo architecto error voluptatibus eum adipisci excepturi aliquam fugiat assumenda dignissimos laudantium earum odit placeat minima voluptatem esse sint laboriosam repellendus quam eos, facere porro quae reiciendis inventore. Quis."
+        "description": "Created a website with a map of bike lanes and stations in the Boston area. The website includes a slider to filter bike station traffic by time and the station circles change color and size based on bike traffic."
     },
     {
         "title": "Cum voluptatibus earum ipsam!",
