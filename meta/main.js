@@ -360,12 +360,14 @@ function updateScatterPlot(data, commits) {
 }
 
 function updateFileDisplay(filteredCommits) {
+  let colors = d3.scaleOrdinal(d3.schemeTableau10);
   let lines = filteredCommits.flatMap((d) => d.lines);
   let files = d3
     .groups(lines, (d) => d.file)
     .map(([name, lines]) => {
       return { name, lines };
-    });
+    })
+    .sort((a, b) => b.lines.length - a.lines.length);
 
   let filesContainer = d3
     .select('#files')
@@ -380,7 +382,8 @@ function updateFileDisplay(filteredCommits) {
           dt.append('span');
           div.append('dd');
         }),
-    );
+    )
+    
 
   // This code updates the div info
   filesContainer.select('dt > code').text((d) => d.name);
@@ -391,7 +394,8 @@ function updateFileDisplay(filteredCommits) {
     .selectAll('div')
     .data((d) => d.lines)
     .join('div')
-    .attr('class', 'loc');
+    .attr('class', 'loc')
+    .attr('style', (d) => `--color: ${colors(d.type)}`);
 }
 
 
