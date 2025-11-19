@@ -10,6 +10,7 @@ function onTimeSliderChange() {
 
   filteredCommits = commits.filter((d) => d.datetime <= commitMaxTime);
   updateScatterPlot(data, filteredCommits);
+  updateCommitInfo(data, filteredCommits);
 }
 
 async function loadData() {
@@ -84,6 +85,27 @@ function renderCommitInfo(data, commits) {
     dl.append('dd').text(longestFile);
 }
 
+function updateCommitInfo(data, commits) {
+  const dl = d3.select('#stats .stats');
+
+  // Update total LOC
+  const filteredLines = filteredCommits.flatMap(d => d.lines);
+  dl.select('dd:nth-of-type(1)').text(filteredLines.length);
+
+  // Update commits count
+  dl.select('dd:nth-of-type(2)').text(commits.length);
+
+  // Update file count
+  dl.select('dd:nth-of-type(3)').text(d3.groups(data, d => d.file).length);
+
+  // Update average file length
+  dl.select('dd:nth-of-type(4)').text(Math.round(averageFileLength));
+
+  // Update longest file
+  dl.select('dd:nth-of-type(5)').text(longestFile);
+}
+
+
 function renderScatterPlot(data, commits) {
     const width = 1000;
     const height = 600;
@@ -147,7 +169,7 @@ function renderScatterPlot(data, commits) {
     const dots = svg.append('g').attr('class', 'dots');
     dots
         .selectAll('circle')
-        .data(sortedCommits)
+        .data(sortedCommits, (d) => d.id)
         .join('circle')
         .attr('cx', (d) => xScale(d.datetime))
         .attr('cy', (d) => yScale(d.hourFrac))
@@ -300,7 +322,7 @@ function updateScatterPlot(data, commits) {
   const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
   dots
     .selectAll('circle')
-    .data(sortedCommits)
+    .data(sortedCommits, (d) => d.id)
     .join('circle')
     .attr('cx', (d) => xScale(d.datetime))
     .attr('cy', (d) => yScale(d.hourFrac))
