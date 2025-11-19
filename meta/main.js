@@ -10,7 +10,11 @@ function onTimeSliderChange() {
 
   filteredCommits = commits.filter((d) => d.datetime <= commitMaxTime);
   updateScatterPlot(data, filteredCommits);
-  updateCommitInfo(data, filteredCommits);
+
+  const filteredData = data.filter(d => d.datetime <= commitMaxTime);
+  updateCommitInfo(filteredData, filteredCommits);
+
+  updateFileDisplay(filteredCommits);
 }
 
 async function loadData() {
@@ -61,35 +65,49 @@ function processCommits(data) {
 }
 
 function renderCommitInfo(data, commits) {
-    // Create the dl element
-    const dl = d3.select('#stats').append('dl').attr('class', 'stats');
+  let fileLengths = d3.rollups(
+    data,
+    (v) => d3.max(v, (v) => v.line),
+    (d) => d.file,
+  );
+  let averageFileLength = d3.mean(fileLengths, (d) => d[1]);
+  let longestFile = d3.greatest(fileLengths, (d) => d[1])?.[0];
+  // Create the dl element
+  let dl = d3.select('#stats').append('dl').attr('class', 'stats');
 
-    // Add total LOC
-    dl.append('dt').html('Total <abbr title="Lines of code">LOC</abbr>');
-    dl.append('dd').text(data.length);
+  // Add total LOC
+  dl.append('dt').html('Total <abbr title="Lines of code">LOC</abbr>');
+  dl.append('dd').text(data.length);
 
-    // Add total commits
-    dl.append('dt').text('Commits');
-    dl.append('dd').text(commits.length);
+  // Add total commits
+  dl.append('dt').text('Commits');
+  dl.append('dd').text(commits.length);
 
-    // Add number of files
-    dl.append('dt').text('Files');
-    dl.append('dd').text(d3.groups(data, d => d.file).length);
+  // Add number of files
+  dl.append('dt').text('Files');
+  dl.append('dd').text(d3.groups(data, d => d.file).length);
 
-    // Add average file length
-    dl.append('dt').text('Avg File Length');
-    dl.append('dd').text(Math.round(averageFileLength));
+  // Add average file length
+  dl.append('dt').text('Avg File Length');
+  dl.append('dd').text(Math.round(averageFileLength));
 
-    // Add longest file
-    dl.append('dt').text('Longest File');
-    dl.append('dd').text(longestFile);
+  // Add longest file
+  dl.append('dt').text('Longest File');
+  dl.append('dd').text(longestFile);
 }
 
 function updateCommitInfo(data, commits) {
+  let fileLengths = d3.rollups(
+    data,
+    (v) => d3.max(v, (v) => v.line),
+    (d) => d.file,
+  );
+  let averageFileLength = d3.mean(fileLengths, (d) => d[1]);
+  let longestFile = d3.greatest(fileLengths, (d) => d[1])?.[0];
   const dl = d3.select('#stats .stats');
 
   // Update total LOC
-  const filteredLines = filteredCommits.flatMap(d => d.lines);
+  const filteredLines = commits.flatMap(d => d.lines);
   dl.select('dd:nth-of-type(1)').text(filteredLines.length);
 
   // Update commits count
@@ -341,20 +359,38 @@ function updateScatterPlot(data, commits) {
     });
 }
 
+function updateFileDisplay(filteredCommits) {
+  let lines = filteredCommits.flatMap((d) => d.lines);
+  let files = d3
+    .groups(lines, (d) => d.file)
+    .map(([name, lines]) => {
+      return { name, lines };
+    });
+
+  let filesContainer = d3
+    .select('#files')
+    .selectAll('div')
+    .data(files, (d) => d.name)
+    .join(
+      // This code only runs when the div is initially rendered
+      (enter) =>
+        enter.append('div').call((div) => {
+          div.append('dt').append('code');
+          div.append('dd');
+        }),
+    );
+
+  // This code updates the div info
+  filesContainer.select('dt > code').text((d) => d.name);
+  filesContainer.select('dd').text((d) => `${d.lines.length} lines`);
+}
+
 
 let data = await loadData();
 let commits = processCommits(data);
 
 let xScale;
 let yScale;
-
-const fileLengths = d3.rollups(
-  data,
-  (v) => d3.max(v, (v) => v.line),
-  (d) => d.file,
-);
-const averageFileLength = d3.mean(fileLengths, (d) => d[1]);
-const longestFile = d3.greatest(fileLengths, (d) => d[1])?.[0];
 
 renderCommitInfo(data, commits);
 renderScatterPlot(data, commits);
@@ -372,3 +408,4 @@ let filteredCommits = commits;
 
 document.getElementById("commit-progress").addEventListener("input", onTimeSliderChange);
 onTimeSliderChange();
+
