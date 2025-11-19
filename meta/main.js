@@ -1,5 +1,14 @@
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
 
+function onTimeSliderChange() {
+  const slider = document.getElementById("commit-progress");
+  commitProgress = Number(slider.value);
+  commitMaxTime = timeScale.invert(commitProgress);
+
+  document.getElementById("commit-time")
+    .textContent = commitMaxTime.toLocaleString('en-US', {dateStyle: "long", timeStyle: "short"});
+}
+
 async function loadData() {
   const data = await d3.csv('loc.csv', (row) => ({
     ...row,
@@ -270,3 +279,16 @@ const longestFile = d3.greatest(fileLengths, (d) => d[1])?.[0];
 
 renderCommitInfo(data, commits);
 renderScatterPlot(data, commits);
+
+let commitProgress = 100;
+let timeScale = d3
+  .scaleTime()
+  .domain([
+    d3.min(commits, (d) => d.datetime),
+    d3.max(commits, (d) => d.datetime),
+  ])
+  .range([0, 100]);
+let commitMaxTime = timeScale.invert(commitProgress);
+
+document.getElementById("commit-progress").addEventListener("input", onTimeSliderChange);
+onTimeSliderChange();

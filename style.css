@@ -446,3 +446,20 @@ dl.info[hidden]:not(:hover, :focus-within) {
   stroke-dasharray: 5 3;
   animation: marching-ants 2s linear infinite;
 }
+
+.slider {
+  display: block;
+  align-items: right;
+  gap: 1em;
+  width: 100%;
+  text-align: end;
+}
+
+#commit-time {
+  white-space: nowrap;
+  margin-right: auto;
+}
+
+#commit-progress {
+  width: 82%;
+}
