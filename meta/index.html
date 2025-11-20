@@ -21,32 +21,30 @@
         </label>
     </div>
 
-    <dl id="files">
-        <!-- we want the following structure for each file:
-        <div>
-            <dt>
-            <code>{file.name}</code>
-            </dt>
-            <dd>{file.lines.length} lines</dd>
-        </div>
-        -->
-    </dl>
-
     <div id="stats"></div>
     <h2>Commits by time of day</h2>
-    <div id="chart"></div>
-    <dl id="commit-tooltip" class="info tooltip" hidden>
-        <dt>Commit</dt>
-        <dd>
-            <a href="" id="commit-link" target="_blank"></a>
-        </dd>
 
-        <dt>Date</dt>
-        <dd id="commit-date"></dd>
+    <div id="scrolly-1">
+    <div id="scatter-story"></div>
+    <div id="scatter-plot">
+        <div id="chart"></div>
+        <dl id="commit-tooltip" class="info tooltip" hidden>
+            <dt>Commit</dt>
+            <dd>
+                <a href="" id="commit-link" target="_blank"></a>
+            </dd>
 
-        <!-- Add: Time, author, lines edited -->
-    </dl>
+            <dt>Date</dt>
+            <dd id="commit-date"></dd>
+
+            <!-- Add: Time, author, lines edited -->
+        </dl>
+    </div>
+    </div>
+
+
     <p id="selection-count">No commits selected</p>
     <dl id="language-breakdown" class="stats"></dl>
+    <dl id="files"></dl>
 </body>
 </html>

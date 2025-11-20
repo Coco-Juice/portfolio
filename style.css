@@ -509,3 +509,29 @@ dl.info[hidden]:not(:hover, :focus-within) {
   padding-top: 0.6em;
   margin-left: 0;
 }
+
+#scrolly-1 {
+  position: relative;
+  display: flex;
+  gap: 1rem;
+
+  > * {
+    flex: 1;
+  }
+}
+
+#scatter-story {
+  position: relative;
+}
+
+#scatter-plot {
+  position: sticky;
+  top: 100px;
+  left: 0;
+  bottom: auto;
+  height: 50vh;
+}
+
+.step {
+  padding-bottom: 1em
+}
