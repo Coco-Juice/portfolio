@@ -1,23 +1,6 @@
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
 import scrollama from 'https://cdn.jsdelivr.net/npm/scrollama@3.2.0/+esm';
 
-function onTimeSliderChange() {
-  const slider = document.getElementById("commit-progress");
-  commitProgress = Number(slider.value);
-  commitMaxTime = timeScale.invert(commitProgress);
-
-  document.getElementById("commit-time")
-    .textContent = commitMaxTime.toLocaleString('en-US', {dateStyle: "long", timeStyle: "short"});
-
-  filteredCommits = commits.filter((d) => d.datetime <= commitMaxTime);
-  updateScatterPlot(data, filteredCommits);
-
-  const filteredData = data.filter(d => d.datetime <= commitMaxTime);
-  updateCommitInfo(filteredData, filteredCommits);
-
-  updateFileDisplay(filteredCommits);
-}
-
 async function loadData() {
   const data = await d3.csv('loc.csv', (row) => ({
     ...row,
@@ -409,19 +392,8 @@ let yScale;
 renderCommitInfo(data, commits);
 renderScatterPlot(data, commits);
 
-let commitProgress = 100;
-let timeScale = d3
-  .scaleTime()
-  .domain([
-    d3.min(commits, (d) => d.datetime),
-    d3.max(commits, (d) => d.datetime),
-  ])
-  .range([0, 100]);
-let commitMaxTime = timeScale.invert(commitProgress);
 let filteredCommits = commits;
-
-document.getElementById("commit-progress").addEventListener("input", onTimeSliderChange);
-onTimeSliderChange();
+updateFileDisplay(filteredCommits);
 
 d3.select('#scatter-story')
   .selectAll('.step')
