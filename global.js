@@ -8,7 +8,6 @@ const BASE_PATH = (location.hostname === "localhost" || location.hostname === "1
 let pages = [
   { url: '', title: 'Home' },
   { url: 'projects/', title: 'Projects' },
-  { url: 'contacts/', title: 'Contacts' },
   { url: 'resume.html', title: 'Resume' },
   { url: 'meta/', title: 'Meta'},
   { url: 'https://github.com/Coco-Juice', title: 'GitHub' }
