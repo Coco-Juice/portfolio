@@ -9,9 +9,9 @@ body {
 	   and use the OS’s UI font as the website font
 	 */
   font: 100%/1.5 system-ui;
-  max-width: 100ch;
-  margin-inline: max(1em, (100% - 100ch) / 2);
-  padding: 10px;
+  max-width: 110ch;
+  margin-inline: auto;
+  padding-inline: 1em;
 }
 
 /* navigation bar */
